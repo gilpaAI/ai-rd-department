@@ -118,14 +118,20 @@ See `.claude/rules/context-protocol.md` for full protocol details.
 
 ## Agent Interaction Logging (Flight Recorder)
 
-All agents must log significant actions to `.claude/internal/DISCUSSION_LOG.md`:
-```
-[YYYY-MM-DD HH:MM] **{Role}** -> **{Target}**: {Action Summary}
-```
+**MANDATORY — every command and agent session MUST do this as Step 0, before any other work:**
+
+1. Ensure the log directories exist: `mkdir -p ".claude/internal" ".claude/logs"`
+2. Append a session-start entry to `.claude/internal/DISCUSSION_LOG.md`:
+   ```
+   [YYYY-MM-DD HH:MM] **{Role}** -> **{Target}**: {Action Summary}
+   ```
+3. Log ALL subsequent significant actions to BOTH `.claude/internal/DISCUSSION_LOG.md` AND `.claude/logs/interactions.jsonl` throughout the session (see `.claude/rules/interaction-logging.md` for exact shell commands and schema).
+
+Significant actions include: command start, task/subtask completion, file updates, GitHub issue operations, handoffs between roles, architectural decisions, errors, and session end.
 
 This provides visibility into agent handoffs, decisions, and progress. View with `/pm:wiretap`.
 
-Machine-readable JSONL log also at `.claude/logs/interactions.jsonl`. See `.claude/rules/interaction-logging.md` for full protocol.
+**Never skip logging.** If a command file does not include an explicit logging step, this global rule overrides it — log anyway.
 
 ## Communication Protocol
 - Use Beads (bd) for persistent task tracking across sessions
