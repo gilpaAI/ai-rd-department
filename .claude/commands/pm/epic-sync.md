@@ -53,16 +53,51 @@ if [[ "$remote_url" == *"automazeio/ccpm"* ]] || [[ "$remote_url" == *"automazei
 fi
 ```
 
-### 1. Create Epic Issue
+### 1. Resolve Target Repository
 
-#### First, detect the GitHub repository:
+Each project has its own dedicated GitHub repo. Check the epic frontmatter first:
 ```bash
-# Get the current repository from git remote
-remote_url=$(git remote get-url origin 2>/dev/null || echo "")
-REPO=$(echo "$remote_url" | sed 's|.*github.com[:/]||' | sed 's|\.git$||')
-[ -z "$REPO" ] && REPO="user/repo"
-echo "Creating issues in repository: $REPO"
+# Priority 1: Read repo from epic frontmatter
+REPO=$(grep '^repo:' .claude/epics/$ARGUMENTS/epic.md | sed 's/^repo: *//' | sed 's/^[[:space:]]*//')
+
+# Priority 2: Read repo from PRD frontmatter
+if [ -z "$REPO" ] || [ "$REPO" = "[Will be set when GitHub repo is created]" ]; then
+  PRD_PATH=$(grep '^prd:' .claude/epics/$ARGUMENTS/epic.md | sed 's/^prd: *//')
+  if [ -n "$PRD_PATH" ] && [ -f "$PRD_PATH" ]; then
+    REPO=$(grep '^repo:' "$PRD_PATH" | sed 's/^repo: *//' | sed 's/^[[:space:]]*//')
+  fi
+fi
+
+# Priority 3: Fall back to git remote origin
+if [ -z "$REPO" ] || [[ "$REPO" == *"Will be"* ]]; then
+  remote_url=$(git remote get-url origin 2>/dev/null || echo "")
+  REPO=$(echo "$remote_url" | sed 's|.*github.com[:/]||' | sed 's|\.git$||')
+fi
+
+[ -z "$REPO" ] && echo "❌ No target repo found. Run /idea to create one." && exit 1
+echo "Target repository: $REPO"
 ```
+
+### 2. Ensure Labels Exist
+
+Create required labels if they don't already exist (follows `/rules/github-labels.md`):
+```bash
+
+# Create labels (--force updates if exists, no error if already present)
+gh label create "epic" --repo "$REPO" --color "7057ff" --description "Parent issue for a feature" --force 2>/dev/null
+gh label create "task" --repo "$REPO" --color "0075ca" --description "Work item within an epic" --force 2>/dev/null
+gh label create "status:backlog" --repo "$REPO" --color "d4c5f9" --description "Planned, not started" --force 2>/dev/null
+gh label create "status:in-progress" --repo "$REPO" --color "fbca04" --description "Actively being worked on" --force 2>/dev/null
+gh label create "status:blocked" --repo "$REPO" --color "d93f0b" --description "Cannot proceed" --force 2>/dev/null
+gh label create "priority:high" --repo "$REPO" --color "b60205" --description "Must do first" --force 2>/dev/null
+gh label create "priority:medium" --repo "$REPO" --color "fbca04" --description "Standard priority" --force 2>/dev/null
+gh label create "priority:low" --repo "$REPO" --color "0e8a16" --description "When available" --force 2>/dev/null
+gh label create "epic:$ARGUMENTS" --repo "$REPO" --color "e4e669" --description "Epic: $ARGUMENTS" --force 2>/dev/null
+
+echo "✅ Labels ready in repository: $REPO"
+```
+
+### 3. Create Epic Issue
 
 Strip frontmatter and prepare GitHub issue body:
 ```bash
@@ -128,7 +163,7 @@ epic_number=$(gh issue create \
 
 Store the returned issue number for epic frontmatter update.
 
-### 2. Create Task Sub-Issues
+### 3. Create Task Sub-Issues
 
 Check if gh-sub-issue is available:
 ```bash
@@ -244,7 +279,7 @@ cat /tmp/batch-*/mapping.txt >> /tmp/task-mapping.txt
 # 3. Rename files with proper frontmatter updates
 ```
 
-### 3. Rename Task Files and Update References
+### 4. Rename Task Files and Update References
 
 First, build a mapping of old numbers to new issue IDs:
 ```bash
@@ -293,7 +328,7 @@ while IFS=: read -r task_file task_number; do
 done < /tmp/task-mapping.txt
 ```
 
-### 4. Update Epic with Task List (Fallback Only)
+### 5. Update Epic with Task List (Fallback Only)
 
 If NOT using gh-sub-issue, add task list to epic:
 
@@ -318,7 +353,7 @@ fi
 
 With gh-sub-issue, this is automatic!
 
-### 5. Update Epic File
+### 6. Update Epic File
 
 Update the epic file with GitHub URL, timestamp, and real task IDs:
 
@@ -391,7 +426,7 @@ rm .claude/epics/$ARGUMENTS/epic.md.backup
 rm /tmp/tasks-section.md
 ```
 
-### 6. Create Mapping File
+### 7. Create Mapping File
 
 Create `.claude/epics/$ARGUMENTS/github-mapping.md`:
 ```bash
@@ -419,7 +454,7 @@ echo "" >> .claude/epics/$ARGUMENTS/github-mapping.md
 echo "Synced: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> .claude/epics/$ARGUMENTS/github-mapping.md
 ```
 
-### 7. Create Worktree
+### 8. Create Worktree
 
 Follow `/rules/worktree-operations.md` to create development worktree:
 
@@ -434,7 +469,7 @@ git worktree add ../epic-$ARGUMENTS -b epic/$ARGUMENTS
 echo "✅ Created worktree: ../epic-$ARGUMENTS"
 ```
 
-### 8. Output
+### 9. Output
 
 ```
 ✅ Synced to GitHub

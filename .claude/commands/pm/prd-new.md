@@ -101,6 +101,7 @@ name: $ARGUMENTS
 description: [Brief one-line description of the PRD]
 status: backlog
 created: [Current ISO date/time]
+repo: [Will be set when GitHub repo is created]
 ---
 
 # PRD: $ARGUMENTS
@@ -121,6 +122,7 @@ created: [Current ISO date/time]
 - **created**: Get REAL current datetime by running: `date -u +"%Y-%m-%dT%H:%M:%SZ"`
   - Never use placeholder text
   - Must be actual system time in ISO 8601 format
+- **repo**: Leave as placeholder — will be updated by `/idea` when the GitHub repo is created
 
 ### 5. Quality Checks
 

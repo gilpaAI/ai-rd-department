@@ -2,3 +2,6 @@
 node_modules/
 *.log
 .claude/settings.local.json
+
+.ai/.cache/
+ai-cartographer/

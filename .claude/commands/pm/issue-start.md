@@ -125,9 +125,10 @@ Task:
 
 ### 5. GitHub Assignment
 
+Update status labels on GitHub (source of truth — see `/rules/github-source-of-truth.md`):
 ```bash
-# Assign to self and mark in-progress
-gh issue edit $ARGUMENTS --add-assignee @me --add-label "in-progress"
+# Add in-progress label, remove backlog if present
+gh issue edit $ARGUMENTS --add-assignee @me --add-label "status:in-progress" --remove-label "status:backlog"
 ```
 
 ### 6. Output

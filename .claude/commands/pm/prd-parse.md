@@ -72,6 +72,7 @@ status: backlog
 created: [Current ISO date/time]
 progress: 0%
 prd: .claude/prds/$ARGUMENTS.md
+repo: [Copy from PRD frontmatter — the GitHub repo for this project]
 github: [Will be updated when synced to GitHub]
 ---
 
@@ -134,6 +135,7 @@ High-level task categories that will be created:
 - **created**: Get REAL current datetime by running: `date -u +"%Y-%m-%dT%H:%M:%SZ"`
 - **progress**: Always start with "0%" for new epics
 - **prd**: Reference the source PRD file path
+- **repo**: Copy from the PRD frontmatter (`repo` field) — this is the dedicated GitHub repo for this project. If the PRD has no `repo` field, leave as placeholder.
 - **github**: Leave placeholder text - will be updated during sync
 
 ### 5. Output Location
