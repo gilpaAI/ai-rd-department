@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(gh repo view:*)",
+      "WebFetch(domain:github.com)",
+      "WebSearch",
+      "Bash(git --version:*)",
+      "Bash(node --version:*)",
+      "Bash(npm:*)",
+      "Bash(winget:*)",
+      "WebFetch(domain:steveyegge.github.io)",
+      "Bash(python3 -c \"\nimport json, sys\nwith open\\(r''C:\\\\Users\\\\gilpa\\\\.claude\\\\projects\\\\C--Users-gilpa-R-D-Dep\\\\db2cfc77-5251-468c-b392-3b0b74e408ad.jsonl'', ''r'', encoding=''utf-8''\\) as f:\n    for line in f:\n        try:\n            obj = json.loads\\(line.strip\\(\\)\\)\n            msg = json.dumps\\(obj, indent=2\\)\n            if any\\(kw in msg.lower\\(\\) for kw in [''claude.md'', ''idea.md'', ''status.md'', ''build.md'', ''resume.md'', ''constitution'', ''slash command'']\\):\n                if ''message'' in obj:\n                    content = obj[''message''].get\\(''content'', ''''\\)\n                    if isinstance\\(content, list\\):\n                        for item in content:\n                            if isinstance\\(item, dict\\) and item.get\\(''type''\\) == ''text'':\n                                text = item[''text'']\n                                if len\\(text\\) > 100 and any\\(kw in text.lower\\(\\) for kw in [''claude.md'', ''idea.md'', ''status.md'', ''build.md'', ''resume.md'', ''constitution'', ''slash command'', ''# ai r&d'', ''management layer'', ''product manager'']\\):\n                                    print\\(''=== RELEVANT CONTENT ===''\\)\n                                    print\\(text[:5000]\\)\n                                    print\\(''...\\(truncated\\)'' if len\\(text\\) > 5000 else ''''\\)\n                                    print\\(\\)\n                    elif isinstance\\(content, str\\) and len\\(content\\) > 100:\n                        if any\\(kw in content.lower\\(\\) for kw in [''claude.md'', ''idea.md'', ''status.md'', ''build.md'', ''resume.md'', ''constitution'', ''slash command'', ''# ai r&d'', ''management layer'', ''product manager'']\\):\n                            print\\(''=== RELEVANT CONTENT ===''\\)\n                            print\\(content[:5000]\\)\n                            print\\(''...\\(truncated\\)'' if len\\(content\\) > 5000 else ''''\\)\n                            print\\(\\)\n        except:\n            pass\n\")",
+      "Bash(python -c \"\nimport json, sys\nwith open\\(r''C:\\\\Users\\\\gilpa\\\\.claude\\\\projects\\\\C--Users-gilpa-R-D-Dep\\\\db2cfc77-5251-468c-b392-3b0b74e408ad.jsonl'', ''r'', encoding=''utf-8''\\) as f:\n    for line in f:\n        try:\n            obj = json.loads\\(line.strip\\(\\)\\)\n            msg = json.dumps\\(obj, indent=2\\)\n            if any\\(kw in msg.lower\\(\\) for kw in [''claude.md'', ''idea.md'', ''status.md'', ''build.md'', ''resume.md'', ''constitution'', ''slash command'']\\):\n                if ''message'' in obj:\n                    content = obj[''message''].get\\(''content'', ''''\\)\n                    if isinstance\\(content, list\\):\n                        for item in content:\n                            if isinstance\\(item, dict\\) and item.get\\(''type''\\) == ''text'':\n                                text = item[''text'']\n                                if len\\(text\\) > 100 and any\\(kw in text.lower\\(\\) for kw in [''claude.md'', ''idea.md'', ''status.md'', ''build.md'', ''resume.md'', ''constitution'', ''slash command'', ''# ai r&d'', ''management layer'', ''product manager'']\\):\n                                    print\\(''=== RELEVANT CONTENT ===''\\)\n                                    print\\(text[:5000]\\)\n                                    print\\(''...\\(truncated\\)'' if len\\(text\\) > 5000 else ''''\\)\n                                    print\\(\\)\n                    elif isinstance\\(content, str\\) and len\\(content\\) > 100:\n                        if any\\(kw in content.lower\\(\\) for kw in [''claude.md'', ''idea.md'', ''status.md'', ''build.md'', ''resume.md'', ''constitution'', ''slash command'', ''# ai r&d'', ''management layer'', ''product manager'']\\):\n                            print\\(''=== RELEVANT CONTENT ===''\\)\n                            print\\(content[:5000]\\)\n                            print\\(''...\\(truncated\\)'' if len\\(content\\) > 5000 else ''''\\)\n                            print\\(\\)\n        except:\n            pass\n\")",
+      "Bash(python:*)",
+      "Bash(powershell -Command \"winget install --id GitHub.cli --accept-source-agreements --accept-package-agreements\")",
+      "Bash(export PATH=\"$PATH:/c/Program Files/GitHub CLI:/c/Users/gilpa/AppData/Local/Microsoft/WindowsApps\")",
+      "Bash(gh:*)",
+      "Bash(export PATH=\"$PATH:/c/Program Files/GitHub CLI\")",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)"
+    ]
+  }
+}
