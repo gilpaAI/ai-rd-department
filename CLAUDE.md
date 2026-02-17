@@ -21,7 +21,26 @@ This project is managed by an AI R&D department. The human (Gil) is the CEO/Stak
 ## Workflow Rules
 
 ### When Gil has a new idea:
-1. PM conducts a discovery session -- asks questions to understand the idea fully
+
+**Two commands — pick the right one:**
+
+| Situation | Command |
+|-----------|---------|
+| Brand new standalone project (doesn't exist yet) | `/new-project` |
+| New feature, change, or addition to an existing project | `/idea` |
+
+#### `/new-project` — Starting a brand new project
+1. PM conducts a discovery session — asks questions to understand the project fully
+2. PM asks for the project name and local parent folder path
+3. **A local folder is created and git-initialized** at the specified path
+4. PM writes a PRD using /pm:prd-new [project-name]
+5. PjM creates a project plan with milestones and timeline estimates
+6. Budget Owner provides effort estimates (S/M/L/XL) and flags risks
+7. All three present a summary to Gil for approval
+8. ONLY after Gil approves: Technical Layer begins work
+
+#### `/idea` — Adding to or modifying an existing project
+1. PM conducts a discovery session — asks questions to understand the idea fully
 2. PM writes a PRD using /pm:prd-new [feature-name]
 3. **A new GitHub repository is created** for this project (`gh repo create`)
    - Each idea gets its own dedicated repo
