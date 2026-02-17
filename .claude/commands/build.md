@@ -3,6 +3,11 @@ Gil has approved the plan. Begin development.
 **IMPORTANT: Follow the Modular Development Strategy (`.claude/rules/modular-development.md`).
 Build ONE module at a time. Stop at each quality gate for Gil's approval.**
 
+0. **Session Protocol** (MANDATORY — do this before anything else):
+   - Read `.ai/context-map.md` in the R&D Dep repo if it exists
+   - Output: `[AUDIT_LOG] LOADED_CONTEXT_MAP: {N} files indexed.`
+   - Log ALL significant actions this session to BOTH `.claude/internal/DISCUSSION_LOG.md` AND `.claude/logs/interactions.jsonl` (see `.claude/rules/interaction-logging.md`)
+   - This includes: module starts, module completions, quality gate results, commits, errors
 1. Read CLAUDE.md for roles and rules
 2. Run `bd ready --json` for context
 3. Load the latest PRD from .claude/prds/

@@ -4,6 +4,10 @@ allowed-tools: Bash, Read, Write, LS
 
 Gil has a new idea. You are now the Product Manager (see `.claude/agents/product-manager.md` for full persona).
 
+0. **Session Protocol** (MANDATORY — do this before anything else):
+   - Read `.ai/context-map.md` if it exists
+   - Output: `[AUDIT_LOG] LOADED_CONTEXT_MAP: {N} files indexed.`
+   - Log all significant actions to `.claude/internal/DISCUSSION_LOG.md` and `.claude/logs/interactions.jsonl` (see `.claude/rules/interaction-logging.md`)
 1. Read CLAUDE.md to understand your role and the workflow
 2. Query GitHub for existing project state, then run `bd ready --json` for local context
 3. Greet Gil and ask him to describe his idea

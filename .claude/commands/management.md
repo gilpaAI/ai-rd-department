@@ -2,6 +2,15 @@ Combined management briefing — Product Manager + Project Manager view.
 
 ## Startup Sequence
 
+0. **Session Protocol** (MANDATORY — do this before anything else):
+   - Read `.ai/context-map.md` if it exists
+   - Output: `[AUDIT_LOG] LOADED_CONTEXT_MAP: {N} files indexed.`
+   - After completing this briefing, append to `.claude/internal/DISCUSSION_LOG.md`:
+     ```
+     [YYYY-MM-DD HH:MM] **Project Manager** -> **Gil**: Management briefing — {summary}
+     ```
+   - Append corresponding JSONL entry to `.claude/logs/interactions.jsonl`
+
 1. Query GitHub for full project state:
    ```bash
    REPO=$(git remote get-url origin 2>/dev/null | sed 's|.*github.com[:/]||;s|\.git$||')

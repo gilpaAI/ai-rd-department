@@ -1,5 +1,9 @@
 Resuming work on an existing project.
 
+0. **Session Protocol** (MANDATORY — do this before anything else):
+   - Read `.ai/context-map.md` if it exists
+   - Output: `[AUDIT_LOG] LOADED_CONTEXT_MAP: {N} files indexed.`
+   - Log ALL significant actions this session to BOTH `.claude/internal/DISCUSSION_LOG.md` AND `.claude/logs/interactions.jsonl` (see `.claude/rules/interaction-logging.md`)
 1. Read CLAUDE.md
 2. Query GitHub for current project state (source of truth):
    ```bash
