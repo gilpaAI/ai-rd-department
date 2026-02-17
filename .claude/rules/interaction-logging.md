@@ -75,15 +75,19 @@ All agent actions are logged to provide visibility into the "hidden" conversatio
 After completing a significant action, append to both logs:
 
 ```bash
-# Get current timestamp
+REPO_ROOT="/c/Users/gilpa/R&D Dep"
 TS=$(date -u +"%Y-%m-%d %H:%M")
 TS_ISO=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
-# Append to human-readable log
-echo "[$TS] **{Role}** -> **{Target}**: {Summary}" >> .claude/internal/DISCUSSION_LOG.md
+# Ensure log directories exist
+mkdir -p "$REPO_ROOT/.claude/internal" "$REPO_ROOT/.claude/logs"
 
-# Append to JSONL log
-echo '{"timestamp":"'$TS_ISO'","trace_id":"{epic_or_cmd}","sender":"{Role}","receiver":"{Target}","action":"{action_type}","artifact":"{file_path}","summary":"{Summary}"}' >> .claude/logs/interactions.jsonl
+# Append to human-readable log
+echo "[$TS] **{Role}** -> **{Target}**: {Summary}" >> "$REPO_ROOT/.claude/internal/DISCUSSION_LOG.md"
+
+# Append to JSONL log (use printf to avoid echo escape issues on Windows)
+printf '{"timestamp":"%s","trace_id":"{epic_or_cmd}","sender":"{Role}","receiver":"{Target}","action":"{action_type}","artifact":"{file_path}","summary":"{Summary}"}\n' \
+  "$TS_ISO" >> "$REPO_ROOT/.claude/logs/interactions.jsonl"
 ```
 
 ### Shortcut
