@@ -41,7 +41,9 @@ Do not bother the user with preflight checks progress ("I'm not going to ..."). 
 
 ## Instructions
 
-You are decomposing an epic into specific, actionable tasks for: **$ARGUMENTS**
+**IMPORTANT:** Follow `.claude/rules/modular-development.md` — tasks are **modules**, each sized for ~30 minutes of agent work with a quality gate.
+
+You are decomposing an epic into specific, actionable modules for: **$ARGUMENTS**
 
 ### 1. Read the Epic
 - Load the epic from `.claude/epics/$ARGUMENTS/epic.md`
@@ -203,12 +205,14 @@ Also update the epic's frontmatter progress if needed (still 0% until tasks actu
 
 ### 9. Quality Validation
 
-Before finalizing tasks, verify:
-- [ ] All tasks have clear acceptance criteria
-- [ ] Task sizes are reasonable (1-3 days each)
+Before finalizing modules, verify:
+- [ ] All modules have clear acceptance criteria
+- [ ] Each module is ~30 minutes of agent work (15-45 min range)
+- [ ] Each module produces a testable, demonstrable result
+- [ ] Each module is self-contained with clear inputs and outputs
 - [ ] Dependencies are logical and achievable
-- [ ] Parallel tasks don't conflict with each other
-- [ ] Combined tasks cover all epic requirements
+- [ ] Parallel modules don't conflict with each other
+- [ ] Combined modules cover all epic requirements
 
 ### 10. Post-Decomposition
 
@@ -227,4 +231,4 @@ If any step fails:
 - Provide option to clean up partial tasks
 - Never leave the epic in an inconsistent state
 
-Aim for tasks that can be completed in 1-3 days each. Break down larger tasks into smaller, manageable pieces for the "$ARGUMENTS" epic.
+Aim for modules that can be completed in ~30 minutes of agent work each. Each module must be self-contained and produce a testable deliverable. See `.claude/rules/modular-development.md` for sizing guidelines.

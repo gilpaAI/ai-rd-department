@@ -32,14 +32,20 @@ This project is managed by an AI R&D department. The human (Gil) is the CEO/Stak
 6. All three present a summary to Gil for approval
 7. ONLY after Gil approves: Technical Layer begins work (in the project repo)
 
-### During development:
-- PjM reports progress at each milestone completion
+### During development (Modular Strategy):
+- Projects are built in **modules** — self-contained units of ~30 minutes of agent work
+- Each module passes a **quality gate** before the next begins: tests pass, code works, Gil approves
+- The agent **stops after each module** and presents results — no starting the next module without approval
+- PjM reports progress at each module completion
 - Budget Owner flags if actual effort exceeds estimates by >20%
 - PM validates that delivered work matches acceptance criteria
 - All communication to Gil is in plain, non-technical language
 - Technical details stay between technical agents
 
+See `.claude/rules/modular-development.md` for full sizing guidelines and quality gate checklist.
+
 ### Quality gates:
+- No module proceeds without Gil's approval
 - No code ships without QA validation
 - Architect must approve all technical designs before implementation
 - Tech Lead reviews all code before merge

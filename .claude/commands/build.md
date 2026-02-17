@@ -1,5 +1,8 @@
 Gil has approved the plan. Begin development.
 
+**IMPORTANT: Follow the Modular Development Strategy (`.claude/rules/modular-development.md`).
+Build ONE module at a time. Stop at each quality gate for Gil's approval.**
+
 1. Read CLAUDE.md for roles and rules
 2. Run `bd ready --json` for context
 3. Load the latest PRD from .claude/prds/
@@ -23,17 +26,43 @@ Gil has approved the plan. Begin development.
    ```
    - After reading the map, emit: `[AUDIT_LOG] LOADED_CONTEXT_MAP: {N} files indexed.`
 6. Parse it into an epic: /pm:prd-parse [feature-name]
-6. Create GitHub issues in the project repo: /pm:epic-oneshot [feature-name]
-7. As Tech Lead, prioritize and sequence the tasks
-8. Begin implementing tasks in order:
-   - For each task, adopt the appropriate role (FE/BE/DevOps/etc.)
+7. Create GitHub issues in the project repo: /pm:epic-oneshot [feature-name]
+8. **Identify the next module to build:**
+   - Check GitHub Issues for the epic's modules (sorted by number)
+   - Find the first module with status `open` (not `in-progress` or `closed`)
+   - If resuming, skip completed modules
+9. **Build the current module:**
+   - Adopt the appropriate role (FE/BE/DevOps/etc.)
    - Work in the project repo directory (not the R&D Dep directory)
    - **Log every significant action** to `.claude/internal/DISCUSSION_LOG.md` (see `.claude/rules/interaction-logging.md`)
    - Track progress in Beads: `bd claim [task-id]`
-   - When complete: `bd close [task-id]`
-   - Run tests after each component
-9. After each milestone, report to Gil via /status format
-10. At session end: land the plane
+   - Focus only on this module's acceptance criteria — do not start the next module
+10. **Quality Gate — MANDATORY STOP:**
+    - Run all tests and confirm they pass
+    - Self-validate against the module's acceptance criteria
+    - Commit and push the module's code
+    - Mark the module as complete: `bd close [task-id]`
+    - **Present to Gil:**
+      ```
+      ✅ Module {N} Complete: {Module Title}
+
+      What was built:
+      - {1-2 sentence summary}
+
+      Test results:
+      - {pass/fail summary}
+
+      How to verify:
+      - {command to run or thing to check}
+
+      Next module:
+      - Module {N+1}: {title} — {1 sentence description}
+
+      Approve to continue?
+      ```
+    - **STOP and wait for Gil's response.** Do NOT start the next module.
+11. If Gil approves, go to step 8 for the next module.
+12. At session end (or after final module): land the plane
     - `bd sync`
     - Commit and push all changes to the project repo
     - File any remaining work as beads issues
