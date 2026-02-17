@@ -5,3 +5,4 @@ node_modules/
 
 .ai/.cache/
 ai-cartographer/
+site/
