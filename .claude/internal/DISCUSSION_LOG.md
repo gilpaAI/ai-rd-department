@@ -16,6 +16,16 @@
 [2026-02-18 14:05] **Project Manager** -> **Gil**: Module 1 confirmed complete. Presenting Module 2 options.
 [2026-02-18 14:10] **Backend Developer** -> **src/tutor/layer_c/verifier.py**: Module 2 — Implemented Verifier (SymPy Truth Engine). verify_answer, check_step, solve. Error categorization: Negative Sign, Fraction, Arithmetic, Algebra.
 [2026-02-18 14:10] **QA Engineer** -> **tests/test_verifier.py**: 22 tests written and passing. All 3 public methods covered. Commit 7332c1e pushed.
+[2026-02-18 14:20] **Backend Developer** -> **src/tutor/layer_c/teacher.py**: Module 3 — Implemented TeacherAgent: intent classification (LLM), mastery graph log_gap + mark_conquered.
+[2026-02-18 14:20] **Backend Developer** -> **src/tutor/layer_c/socratic.py**: Module 3 — Implemented SocraticAgent: hint generation, escalation ladder, Socratic constraint enforcement, Verifier integration.
+[2026-02-18 14:21] **QA Engineer** -> **tests/test_teacher.py + test_socratic.py**: 34 tests passing. Commit ad43cfb pushed.
+[2026-02-18 14:30] **QA Engineer** -> **tests/test_integration.py**: Integration tests — 17 tests across 3 groups (Verifier→Teacher, Socratic+Verifier, full-turn simulation). Surfaced known behaviour: step-level equations flagged verified=False (by design). 77/77 total. Commit 9ef7fad pushed.
+[2026-02-18 14:45] **Backend Developer** -> **src/tutor/layer_b/graph.py**: Module 4 — LangGraph graph wired. Teacher→Socratic→Verifier state machine. Conditional routing on intent. Dependency injection for testability.
+[2026-02-18 14:45] **Backend Developer** -> **src/tutor/api.py**: Updated /chat endpoint — real graph invocation, in-memory session store, full ChatResponse model.
+[2026-02-18 14:46] **QA Engineer** -> **tests/test_graph.py**: 19 graph tests — nodes, routing (5 intents), multi-turn accumulation, API endpoint. 96/96 total passing. Commit cd605da pushed.
+[2026-02-18 11:41] **Backend Developer** -> **src/tutor/layer_a/pdf_adapter.py**: Module 5 — Implemented PDFAdapter (Layer A). extract_from_pdf, extract_from_text, _clean. Graceful degradation if PyMuPDF absent.
+[2026-02-18 11:41] **Backend Developer** -> **src/tutor/api.py**: Module 5 — Added /upload endpoint (v0.3.0). UploadResponse model. Problem persisted to session for /chat.
+[2026-02-18 11:41] **QA Engineer** -> **tests/test_pdf_adapter.py**: Module 5 — 20 tests (text cleaning, PDF extraction, upload API). 116/116 total passing. Commit 35d1a80 pushed.
 
 [2026-02-17 19:40] **Product Manager** -> **Gil**: Idea session started. Gathering requirements for new project idea.
 [2026-02-17 19:45] **Product Manager** -> **.claude/prds/new-project-command.md**: PRD created for /new-project command feature.
