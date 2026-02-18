@@ -26,6 +26,10 @@
 [2026-02-18 11:41] **Backend Developer** -> **src/tutor/layer_a/pdf_adapter.py**: Module 5 — Implemented PDFAdapter (Layer A). extract_from_pdf, extract_from_text, _clean. Graceful degradation if PyMuPDF absent.
 [2026-02-18 11:41] **Backend Developer** -> **src/tutor/api.py**: Module 5 — Added /upload endpoint (v0.3.0). UploadResponse model. Problem persisted to session for /chat.
 [2026-02-18 11:41] **QA Engineer** -> **tests/test_pdf_adapter.py**: Module 5 — 20 tests (text cleaning, PDF extraction, upload API). 116/116 total passing. Commit 35d1a80 pushed.
+[2026-02-18 12:25] **Frontend Developer** -> **src/tutor/templates/index.html**: Module 6 — Split-screen chat UI. Grade selector, upload tabs, quick-action buttons, mastery bar.
+[2026-02-18 12:25] **Frontend Developer** -> **src/tutor/static/**: Module 6 — style.css (CSS Grid split-screen, chat bubbles, mastery nodes) + app.js (upload/chat fetch, mastery refresh).
+[2026-02-18 12:25] **Backend Developer** -> **src/tutor/api.py**: Module 6 — StaticFiles mount, GET /, GET /session/{id}, bumped to v0.4.0.
+[2026-02-18 12:25] **QA Engineer** -> **tests/test_frontend.py**: Module 6 — 12 tests (static assets, split-screen HTML, quick buttons, /session endpoint). 128/128 total passing. Commit be2b76e pushed.
 
 [2026-02-17 19:40] **Product Manager** -> **Gil**: Idea session started. Gathering requirements for new project idea.
 [2026-02-17 19:45] **Product Manager** -> **.claude/prds/new-project-command.md**: PRD created for /new-project command feature.
