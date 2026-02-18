@@ -30,6 +30,10 @@
 [2026-02-18 12:25] **Frontend Developer** -> **src/tutor/static/**: Module 6 — style.css (CSS Grid split-screen, chat bubbles, mastery nodes) + app.js (upload/chat fetch, mastery refresh).
 [2026-02-18 12:25] **Backend Developer** -> **src/tutor/api.py**: Module 6 — StaticFiles mount, GET /, GET /session/{id}, bumped to v0.4.0.
 [2026-02-18 12:25] **QA Engineer** -> **tests/test_frontend.py**: Module 6 — 12 tests (static assets, split-screen HTML, quick buttons, /session endpoint). 128/128 total passing. Commit be2b76e pushed.
+[2026-02-18 12:30] **DevOps Engineer** -> **Dockerfile**: Module 7 — Python 3.11-slim, PyMuPDF system deps, non-root user.
+[2026-02-18 12:30] **DevOps Engineer** -> **docker-compose.yml**: Module 7 — healthcheck, live-reload volume, env_file.
+[2026-02-18 12:30] **DevOps Engineer** -> **README.md**: Module 7 — complete rewrite: quick start, API reference, module status table.
+[2026-02-18 12:30] **QA Engineer** -> **tests/test_smoke.py**: Module 7 — 9 E2E smoke tests (upload→chat→session, multi-turn, verify routing, grade level). 137/137 passing. Commit 7e324c5 pushed. MVP COMPLETE.
 
 [2026-02-17 19:40] **Product Manager** -> **Gil**: Idea session started. Gathering requirements for new project idea.
 [2026-02-17 19:45] **Product Manager** -> **.claude/prds/new-project-command.md**: PRD created for /new-project command feature.
