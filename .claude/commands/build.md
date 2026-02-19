@@ -4,7 +4,7 @@ Gil has approved the plan. Begin development.
 Build ONE module at a time. Stop at each quality gate for Gil's approval.**
 
 0. **Session Protocol** (MANDATORY — do this before anything else):
-   - Read `.ai/context-map.md` in the R&D Dep repo if it exists
+   - Read `.ai/context-map.md` in the R&D Dep repo (this directory) if it exists — see `.claude/rules/context-protocol.md`
    - Output: `[AUDIT_LOG] LOADED_CONTEXT_MAP: {N} files indexed.`
    - Log ALL significant actions this session to BOTH `.claude/internal/DISCUSSION_LOG.md` AND `.claude/logs/interactions.jsonl` (see `.claude/rules/interaction-logging.md`)
    - This includes: module starts, module completions, quality gate results, commits, errors
@@ -21,15 +21,25 @@ Build ONE module at a time. Stop at each quality gate for Gil's approval.**
      fi
      ```
    - If no `repo` field, work in the current repository
-5. **Initialize AI Context Map** (see `.claude/rules/context-protocol.md`):
+5. **Initialize AI Context Map in the project repo** (see `.claude/rules/context-protocol.md`):
    ```bash
    cd ../[project-repo]
-   npm init -y 2>/dev/null  # Ensure package.json exists
-   npm install -D ai-cartographer
-   npx ai-cartographer init --free
-   npx ai-cartographer hooks install
+   # If .ai/context-map.md already exists, read it and emit the audit log
+   if [ -f ".ai/context-map.md" ]; then
+     # Read .ai/context-map.md to orient yourself — extract file count from header
+     # Emit: [AUDIT_LOG] LOADED_CONTEXT_MAP: {N} files indexed.
+     # Check staleness (>24h): run `npx ai-cartographer refresh` if needed
+     npx ai-cartographer status 2>/dev/null || true
+   else
+     # First run: install and generate the map
+     npm init -y 2>/dev/null  # Ensure package.json exists
+     npm install -D ai-cartographer
+     npx ai-cartographer init --free
+     npx ai-cartographer hooks install
+     # Then read .ai/context-map.md and emit: [AUDIT_LOG] LOADED_CONTEXT_MAP: {N} files indexed.
+   fi
    ```
-   - After reading the map, emit: `[AUDIT_LOG] LOADED_CONTEXT_MAP: {N} files indexed.`
+   **ALWAYS emit after reading:** `[AUDIT_LOG] LOADED_CONTEXT_MAP: {N} files indexed.`
 6. Parse it into an epic: /pm:prd-parse [feature-name]
 7. Create GitHub issues in the project repo: /pm:epic-oneshot [feature-name]
 8. **Identify the next module to build:**

@@ -60,6 +60,20 @@ If Gil wants to add a feature or change something in an existing project, use `/
    ```
    Tell Gil: "Your project folder is ready at: {PROJECT_PATH}"
 
+5a. **Initialize AI Context Map in the new project** (see `.claude/rules/context-protocol.md`):
+   ```bash
+   cd "$PROJECT_PATH"
+   # Install ai-cartographer and generate the initial context map
+   npm init -y 2>/dev/null  # Ensure package.json exists
+   npm install -D ai-cartographer
+   npx ai-cartographer init --free
+   npx ai-cartographer hooks install
+   # Read .ai/context-map.md and emit the audit log
+   ```
+   After generating the map, read `.ai/context-map.md` and emit:
+   `[AUDIT_LOG] LOADED_CONTEXT_MAP: {N} files indexed.`
+   This map will guide all future development sessions on this project.
+
 6. **Create the PRD in the R&D Dep management repo:**
    - Navigate back to the R&D Dep directory
    - Use /pm:prd-new {project-name}
